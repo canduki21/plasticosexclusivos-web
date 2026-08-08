@@ -129,6 +129,7 @@ document.querySelectorAll('.type-card').forEach(card => {
   const el = document.getElementById(id);
   if (el) el.addEventListener('input', () => {
     cfg[id === 'cfg-ancho' ? 'ancho' : 'alto'] = +el.value || 0;
+    cfgClampFuelle();
     cfgUpdateFuelleDisclaimer();
     cfgUpdatePreview();
   });
@@ -157,16 +158,36 @@ document.getElementById('cfg-espesor-custom')?.addEventListener('input', e => {
 
 /* ── Fuelle input ── */
 document.getElementById('cfg-fuelle')?.addEventListener('input', e => {
-  cfg.fuelle = +e.target.value || 0;
+  const maxF = cfgFuelleMax();
+  let v = +e.target.value || 0;
+  if (v > maxF) { v = maxF; e.target.value = maxF; }
+  cfg.fuelle = v;
   cfgUpdateFuelleDisclaimer();
   cfgUpdatePreview();
 });
+
+function cfgFuelleMax() {
+  const dim = cfg.fuelleTipo === 'americano' ? cfg.alto : cfg.ancho;
+  return Math.max(1, +(dim / 2 - 2.5).toFixed(1));
+}
+
+function cfgClampFuelle() {
+  const input = document.getElementById('cfg-fuelle');
+  if (!input) return;
+  const maxF = cfgFuelleMax();
+  input.max = maxF;
+  if (cfg.fuelle > maxF) {
+    cfg.fuelle = maxF;
+    input.value = maxF;
+  }
+}
 
 /* ── Fuelle tipo radio ── */
 document.querySelectorAll('input[name="cfg-fuelle-tipo"]').forEach(r => {
   r.addEventListener('change', () => {
     cfg.fuelleTipo = r.value;
     cfgUpdateFuelleTipoUI();
+    cfgClampFuelle();
     cfgUpdateFuelleDisclaimer();
     cfgUpdatePreview();
   });
@@ -190,14 +211,17 @@ function cfgUpdateFuelleTipoUI() {
 function cfgUpdateFuelleDisclaimer() {
   const txt = document.getElementById('fuelle-disclaimer-text');
   if (!txt) return;
+  const maxF = cfgFuelleMax();
   if (cfg.fuelleTipo === 'americano') {
     txt.innerHTML =
       `El fuelle americano de <strong>${cfg.fuelle} cm</strong> forma el fondo de la bolsa ` +
-      `mediante un pliegue horizontal en la base. El ancho de la bolsa no se modifica.`;
+      `mediante un pliegue horizontal en la base. El ancho de la bolsa no se modifica. ` +
+      `<em>Máximo permitido: ${maxF} cm (alto ÷ 2 − 2,5).</em>`;
   } else {
     txt.innerHTML =
       `El fuelle lateral de <strong>${cfg.fuelle} cm</strong> crea pliegues verticales en cada costado ` +
-      `que le dan profundidad a la bolsa al abrirse. El ancho de la bolsa no se modifica.`;
+      `que le dan profundidad a la bolsa al abrirse. El ancho de la bolsa no se modifica. ` +
+      `<em>Máximo permitido: ${maxF} cm (ancho ÷ 2 − 2,5).</em>`;
   }
 }
 
@@ -208,6 +232,7 @@ function cfgToggleFuelle() {
   sec.style.display = show ? 'block' : 'none';
   if (show) {
     cfgUpdateFuelleTipoUI();
+    cfgClampFuelle();
     cfgUpdateFuelleDisclaimer();
   }
 }
