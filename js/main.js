@@ -73,15 +73,16 @@ const TOTAL_STEPS = 4;
 
 /* State */
 const cfg = {
-  tipo:      '',
-  ancho:     30,
-  alto:      40,
-  espesor:   '80',
-  fuelle:    5,
-  material:  'Polietileno Baja Densidad (BD)',
-  color:     '#d4eaf7',
-  impresion: 0,
-  cantidad:  1000,
+  tipo:       '',
+  ancho:      30,
+  alto:       40,
+  espesor:    '80',
+  fuelle:     5,
+  fuelleTipo: 'lateral',
+  material:   'Polietileno Baja Densidad (BD)',
+  color:      '#d4eaf7',
+  impresion:  0,
+  cantidad:   1000,
   logoDataUrl: null,
   logoName:    '',
   nombre:    '',
@@ -145,14 +146,43 @@ document.getElementById('cfg-fuelle')?.addEventListener('input', e => {
   cfgUpdatePreview();
 });
 
+/* ── Fuelle tipo radio ── */
+document.querySelectorAll('input[name="cfg-fuelle-tipo"]').forEach(r => {
+  r.addEventListener('change', () => {
+    cfg.fuelleTipo = r.value;
+    cfgUpdateFuelleTipoUI();
+    cfgUpdateFuelleDisclaimer();
+    cfgUpdatePreview();
+  });
+});
+
+function cfgUpdateFuelleTipoUI() {
+  const desc  = document.getElementById('fuelle-tipo-desc');
+  const label = document.getElementById('fuelle-dim-label');
+  const unit  = document.getElementById('fuelle-unit-label');
+  if (cfg.fuelleTipo === 'americano') {
+    if (desc)  desc.textContent  = 'Pliegue horizontal en la base de la bolsa. Forma el fondo al llenarse.';
+    if (label) label.innerHTML   = 'Alto del fuelle (cm)';
+    if (unit)  unit.textContent  = 'cm de fondo';
+  } else {
+    if (desc)  desc.textContent  = 'Pliegues verticales en los costados de la bolsa.';
+    if (label) label.innerHTML   = 'Ancho del fuelle (cm) <span class="fuelle-each">— por cada lado</span>';
+    if (unit)  unit.textContent  = 'cm por lado';
+  }
+}
+
 function cfgUpdateFuelleDisclaimer() {
   const txt = document.getElementById('fuelle-disclaimer-text');
   if (!txt) return;
-  const totalMaterial = cfg.ancho + cfg.fuelle * 2;
-  txt.innerHTML =
-    `El fuelle de <strong>${cfg.fuelle} cm</strong> se duplica en cada lado al plegarse. ` +
-    `Ancho del tubo de material necesario: ` +
-    `<strong>${cfg.ancho} + (${cfg.fuelle} × 2) = ${totalMaterial} cm</strong>.`;
+  if (cfg.fuelleTipo === 'americano') {
+    txt.innerHTML =
+      `El fuelle americano de <strong>${cfg.fuelle} cm</strong> forma el fondo de la bolsa ` +
+      `mediante un pliegue horizontal en la base. El ancho de la bolsa no se modifica.`;
+  } else {
+    txt.innerHTML =
+      `El fuelle lateral de <strong>${cfg.fuelle} cm</strong> crea pliegues verticales en cada costado ` +
+      `que le dan profundidad a la bolsa al abrirse. El ancho de la bolsa no se modifica.`;
+  }
 }
 
 function cfgToggleFuelle() {
@@ -160,7 +190,10 @@ function cfgToggleFuelle() {
   if (!sec) return;
   const show = cfg.tipo === 'Bolsas con Fuelles';
   sec.style.display = show ? 'block' : 'none';
-  if (show) cfgUpdateFuelleDisclaimer();
+  if (show) {
+    cfgUpdateFuelleTipoUI();
+    cfgUpdateFuelleDisclaimer();
+  }
 }
 
 /* ── Material ── */
@@ -278,7 +311,11 @@ function cfgBagSVG(tipo, color, fuelle) {
       <line x1="30" y1="40" x2="170" y2="40" stroke="${stroke}" stroke-width="2.5" stroke-dasharray="6 4"/>
       <ellipse cx="100" cy="130" rx="40" ry="55" fill="${hi}" opacity=".25"/>`,
 
-    'Bolsas con Fuelles': `
+    'Bolsas con Fuelles': cfg.fuelleTipo === 'americano' ? `
+      <rect x="25" y="30" width="150" height="210" rx="6" fill="${fill}" stroke="${stroke}" stroke-width="3"/>
+      <rect x="25" y="${240-fp}" width="150" height="${fp}" rx="4" fill="${shadeColor(fill,-18)}" opacity=".55"/>
+      <line x1="25" y1="${240-fp}" x2="175" y2="${240-fp}" stroke="${stroke}" stroke-width="2" opacity=".6"/>
+      <ellipse cx="100" cy="${240-fp/2}" rx="40" ry="${Math.round(fp*0.35)}" fill="${shadeColor(fill,-28)}" opacity=".25"/>` : `
       <rect x="25" y="30" width="150" height="210" rx="6" fill="${fill}" stroke="${stroke}" stroke-width="3"/>
       <rect x="25" y="30" width="${fp}" height="210" rx="4" fill="${shadeColor(fill,-18)}" opacity=".5"/>
       <rect x="${175-fp}" y="30" width="${fp}" height="210" rx="4" fill="${shadeColor(fill,-18)}" opacity=".5"/>
@@ -353,7 +390,8 @@ function cfgUpdatePreview() {
 
   /* Update summary */
   setText('sum-tipo',      cfg.tipo      || '—');
-  const fuelleSuffix = cfg.tipo === 'Bolsas con Fuelles' ? ` + fuelle ${cfg.fuelle} cm` : '';
+  const fuelleLabel  = cfg.fuelleTipo === 'americano' ? 'fuelle americano' : 'fuelle lateral';
+  const fuelleSuffix = cfg.tipo === 'Bolsas con Fuelles' ? ` + ${fuelleLabel} ${cfg.fuelle} cm` : '';
   setText('sum-medidas',   cfg.ancho && cfg.alto ? `${cfg.ancho} × ${cfg.alto} cm${fuelleSuffix}` : '—');
   setText('sum-espesor',   cfg.espesor   ? cfg.espesor + (cfg.espesor === 'Otro' ? '' : ' µ') : '—');
   setText('sum-material',  cfg.material  || '—');
@@ -378,7 +416,7 @@ function buildMessage() {
 
   return `¡Hola! Quisiera solicitar una cotización:\n\n` +
     `🛍️ *Tipo de bolsa:* ${cfg.tipo || '—'}\n` +
-    `📐 *Medidas:* ${cfg.ancho} cm × ${cfg.alto} cm${cfg.tipo === 'Bolsas con Fuelles' ? ` | Fuelle: ${cfg.fuelle} cm x lado (tubo: ${cfg.ancho + cfg.fuelle*2} cm)` : ''}\n` +
+    `📐 *Medidas:* ${cfg.ancho} cm × ${cfg.alto} cm${cfg.tipo === 'Bolsas con Fuelles' ? ` | Fuelle ${cfg.fuelleTipo === 'americano' ? 'americano (base)' : 'lateral'}: ${cfg.fuelle} cm` : ''}\n` +
     `📏 *Espesor:* ${cfg.espesor}${cfg.espesor === 'Otro' ? '' : ' µ'}\n` +
     `🔩 *Material:* ${cfg.material}\n` +
     `🎨 *Impresión:* ${imp}\n` +

@@ -301,13 +301,32 @@
 
               <!-- Fuelle option — only shown for Bolsas con Fuelles -->
               <div class="fuelle-section" id="fuelle-section" style="display:none">
+
+                <!-- Fuelle type toggle -->
                 <div class="form-group">
-                  <label>Ancho del fuelle (cm) <span class="fuelle-each">— por cada lado</span></label>
+                  <label>Tipo de fuelle</label>
+                  <div class="radio-group">
+                    <label class="radio-pill">
+                      <input type="radio" name="cfg-fuelle-tipo" value="lateral" checked />
+                      <span>Fuelle Lateral</span>
+                    </label>
+                    <label class="radio-pill">
+                      <input type="radio" name="cfg-fuelle-tipo" value="americano" />
+                      <span>Fuelle Americano</span>
+                    </label>
+                  </div>
+                  <span class="dim-hint" style="margin-top:6px;display:block" id="fuelle-tipo-desc">Pliegues verticales en los costados de la bolsa.</span>
+                </div>
+
+                <!-- Fuelle dimension -->
+                <div class="form-group">
+                  <label id="fuelle-dim-label">Ancho del fuelle (cm) <span class="fuelle-each">— por cada lado</span></label>
                   <div class="qty-row">
                     <input type="number" id="cfg-fuelle" min="1" max="50" value="5" placeholder="ej: 5" />
-                    <span class="dim-hint">cm por lado</span>
+                    <span class="dim-hint" id="fuelle-unit-label">cm por lado</span>
                   </div>
                 </div>
+
                 <div class="fuelle-disclaimer" id="fuelle-disclaimer">
                   <svg viewBox="0 0 20 20" fill="currentColor" width="16"><path fill-rule="evenodd" d="M18 10A8 8 0 11 2 10a8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
                   <span id="fuelle-disclaimer-text"></span>
