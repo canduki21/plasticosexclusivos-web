@@ -179,19 +179,29 @@ function cfgBagSVG(tipo, color) {
       <ellipse cx="100" cy="130" rx="40" ry="55" fill="${hi}" opacity=".25"/>`,
 
     'Bolsas con Fuelles': `
-      <rect x="30" y="40" width="140" height="190" rx="6" fill="${fill}" stroke="${stroke}" stroke-width="3"/>
-      <line x1="30" y1="40" x2="170" y2="40" stroke="${stroke}" stroke-width="2" stroke-dasharray="5 3"/>
-      <line x1="30" y1="90" x2="50" y2="110" stroke="${stroke}" stroke-width="1.5" opacity=".7"/>
-      <line x1="170" y1="90" x2="150" y2="110" stroke="${stroke}" stroke-width="1.5" opacity=".7"/>
-      <line x1="30" y1="180" x2="50" y2="160" stroke="${stroke}" stroke-width="1.5" opacity=".7"/>
-      <line x1="170" y1="180" x2="150" y2="160" stroke="${stroke}" stroke-width="1.5" opacity=".7"/>
-      <ellipse cx="100" cy="130" rx="35" ry="48" fill="${hi}" opacity=".22"/>`,
+      <!-- Roll / cylinder -->
+      <ellipse cx="100" cy="62" rx="68" ry="24" fill="${hi}" stroke="${stroke}" stroke-width="2.5"/>
+      <rect x="32" y="62" width="136" height="52" fill="${fill}" stroke="none"/>
+      <ellipse cx="100" cy="114" rx="68" ry="22" fill="${shadeColor(fill,-8)}" stroke="${stroke}" stroke-width="2" opacity=".85"/>
+      <!-- Unrolled flat sheet -->
+      <rect x="32" y="114" width="136" height="118" fill="${fill}" stroke="${stroke}" stroke-width="2.5"/>
+      <!-- Left gusset fold (darker strip) -->
+      <rect x="32" y="114" width="28" height="118" fill="${shadeColor(fill,-22)}" opacity=".55"/>
+      <!-- Right gusset fold (darker strip) -->
+      <rect x="140" y="114" width="28" height="118" fill="${shadeColor(fill,-22)}" opacity=".55"/>
+      <!-- Fold edge lines -->
+      <line x1="60" y1="114" x2="60" y2="232" stroke="${stroke}" stroke-width="1.5" opacity=".5"/>
+      <line x1="140" y1="114" x2="140" y2="232" stroke="${stroke}" stroke-width="1.5" opacity=".5"/>`,
 
     'Bolsas Camiseta/Riñón': `
-      <path d="M68,20 L48,60 L30,60 L30,230 L170,230 L170,60 L152,60 L132,20
-               C124,34 114,42 100,42 C86,42 76,34 68,20Z"
-            fill="${fill}" stroke="${stroke}" stroke-width="3" stroke-linejoin="round"/>
-      <ellipse cx="100" cy="140" rx="38" ry="52" fill="${hi}" opacity=".22"/>`,
+      <!-- Bag body -->
+      <rect x="25" y="38" width="150" height="198" rx="6" fill="${fill}" stroke="${stroke}" stroke-width="3"/>
+      <!-- Oval die-cut handle hole -->
+      <ellipse cx="100" cy="60" rx="36" ry="17" fill="white" stroke="${stroke}" stroke-width="2.5"/>
+      <!-- Subtle body highlight -->
+      <ellipse cx="100" cy="150" rx="42" ry="60" fill="${hi}" opacity=".22"/>
+      <!-- Bottom seam line -->
+      <line x1="25" y1="225" x2="175" y2="225" stroke="${stroke}" stroke-width="1.5" opacity=".4"/>`,
 
     'Bolsas Ecommerce': `
       <rect x="30" y="55" width="140" height="175" rx="6" fill="${fill}" stroke="${stroke}" stroke-width="3"/>
