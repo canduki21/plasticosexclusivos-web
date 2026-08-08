@@ -81,6 +81,8 @@ const cfg = {
   color:     '#d4eaf7',
   impresion: 0,
   cantidad:  1000,
+  logoDataUrl: null,
+  logoName:    '',
   nombre:    '',
   empresa:   '',
   email:     '',
@@ -160,6 +162,72 @@ document.getElementById('cfg-cantidad')?.addEventListener('input', e => {
   cfgUpdatePreview();
 });
 
+/* ── Logo upload ── */
+const logoInput    = document.getElementById('cfg-logo');
+const uploadArea   = document.getElementById('upload-area');
+const placeholder  = document.getElementById('upload-placeholder');
+const previewBox   = document.getElementById('upload-preview');
+const thumbImg     = document.getElementById('upload-thumb');
+const fileNameEl   = document.getElementById('upload-filename');
+const clearBtn     = document.getElementById('upload-clear');
+
+logoInput?.addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  cfg.logoName = file.name;
+
+  if (file.type.startsWith('image/')) {
+    const reader = new FileReader();
+    reader.onload = ev => {
+      cfg.logoDataUrl = ev.target.result;
+      thumbImg.src = ev.target.result;
+      showUploadPreview(file.name);
+      cfgUpdatePreview();
+    };
+    reader.readAsDataURL(file);
+  } else {
+    /* Non-image file (PDF, AI, EPS) — show filename only, no image preview */
+    cfg.logoDataUrl = null;
+    thumbImg.src = '';
+    showUploadPreview(file.name);
+    cfgUpdatePreview();
+  }
+});
+
+function showUploadPreview(name) {
+  placeholder.style.display = 'none';
+  previewBox.style.display  = 'flex';
+  fileNameEl.textContent    = name;
+  if (!cfg.logoDataUrl) thumbImg.style.display = 'none';
+  else thumbImg.style.display = 'block';
+}
+
+clearBtn?.addEventListener('click', e => {
+  e.preventDefault();
+  e.stopPropagation();
+  cfg.logoDataUrl = null;
+  cfg.logoName    = '';
+  logoInput.value = '';
+  placeholder.style.display = '';
+  previewBox.style.display  = 'none';
+  thumbImg.src = '';
+  cfgUpdatePreview();
+});
+
+/* Drag & drop support */
+uploadArea?.addEventListener('dragover', e => { e.preventDefault(); uploadArea.style.borderColor = 'var(--cyan)'; });
+uploadArea?.addEventListener('dragleave', () => { uploadArea.style.borderColor = ''; });
+uploadArea?.addEventListener('drop', e => {
+  e.preventDefault();
+  uploadArea.style.borderColor = '';
+  const file = e.dataTransfer.files[0];
+  if (!file) return;
+  const dt = new DataTransfer();
+  dt.items.add(file);
+  logoInput.files = dt.files;
+  logoInput.dispatchEvent(new Event('change'));
+});
+
 /* ── SVG bag shapes ── */
 function cfgBagSVG(tipo, color) {
   const fill   = color;
@@ -179,19 +247,16 @@ function cfgBagSVG(tipo, color) {
       <ellipse cx="100" cy="130" rx="40" ry="55" fill="${hi}" opacity=".25"/>`,
 
     'Bolsas con Fuelles': `
-      <!-- Roll / cylinder -->
-      <ellipse cx="100" cy="62" rx="68" ry="24" fill="${hi}" stroke="${stroke}" stroke-width="2.5"/>
-      <rect x="32" y="62" width="136" height="52" fill="${fill}" stroke="none"/>
-      <ellipse cx="100" cy="114" rx="68" ry="22" fill="${shadeColor(fill,-8)}" stroke="${stroke}" stroke-width="2" opacity=".85"/>
-      <!-- Unrolled flat sheet -->
-      <rect x="32" y="114" width="136" height="118" fill="${fill}" stroke="${stroke}" stroke-width="2.5"/>
-      <!-- Left gusset fold (darker strip) -->
-      <rect x="32" y="114" width="28" height="118" fill="${shadeColor(fill,-22)}" opacity=".55"/>
-      <!-- Right gusset fold (darker strip) -->
-      <rect x="140" y="114" width="28" height="118" fill="${shadeColor(fill,-22)}" opacity=".55"/>
-      <!-- Fold edge lines -->
-      <line x1="60" y1="114" x2="60" y2="232" stroke="${stroke}" stroke-width="1.5" opacity=".5"/>
-      <line x1="140" y1="114" x2="140" y2="232" stroke="${stroke}" stroke-width="1.5" opacity=".5"/>`,
+      <!-- Main bag rectangle -->
+      <rect x="25" y="30" width="150" height="210" rx="6" fill="${fill}" stroke="${stroke}" stroke-width="3"/>
+      <!-- Left gusset strip -->
+      <rect x="25" y="30" width="30" height="210" rx="4" fill="${shadeColor(fill,-18)}" opacity=".5"/>
+      <!-- Right gusset strip -->
+      <rect x="145" y="30" width="30" height="210" rx="4" fill="${shadeColor(fill,-18)}" opacity=".5"/>
+      <!-- Left fold line -->
+      <line x1="55" y1="30" x2="55" y2="240" stroke="${stroke}" stroke-width="2" opacity=".6"/>
+      <!-- Right fold line -->
+      <line x1="145" y1="30" x2="145" y2="240" stroke="${stroke}" stroke-width="2" opacity=".6"/>`,
 
     'Bolsas Camiseta/Riñón': `
       <!-- Bag body -->
@@ -243,6 +308,12 @@ function cfgUpdatePreview() {
 
   svg.innerHTML = cfgBagSVG(tipo, cfg.color);
 
+  /* Logo overlay */
+  if (cfg.logoDataUrl) {
+    const lx = 60, ly = Math.round(svgH * 0.28), lw = 80, lh = 80;
+    svg.innerHTML += `<image href="${cfg.logoDataUrl}" x="${lx}" y="${ly}" width="${lw}" height="${lh}" preserveAspectRatio="xMidYMid meet" style="filter:drop-shadow(0 2px 6px rgba(0,0,0,.18))"/>`;
+  }
+
   /* Print color dots overlay */
   if (cfg.impresion > 0) {
     const colors = ['#e74c3c','#3498db','#2ecc71','#f39c12','#9b59b6','#1abc9c'];
@@ -284,6 +355,7 @@ function buildMessage() {
     `🔩 *Material:* ${cfg.material}\n` +
     `🎨 *Impresión:* ${imp}\n` +
     `📦 *Cantidad:* ${cfg.cantidad.toLocaleString('es-AR')} unidades\n` +
+    (cfg.logoName ? `🖼️ *Logo/diseño:* ${cfg.logoName} (adjunto por separado)\n` : '') +
     (notas ? `📝 *Notas:* ${notas}\n` : '') +
     `\n👤 *Nombre:* ${nombre || '—'}\n` +
     (empresa ? `🏢 *Empresa:* ${empresa}\n` : '') +
