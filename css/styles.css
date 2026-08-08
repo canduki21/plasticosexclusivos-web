@@ -357,11 +357,30 @@ ul   { list-style: none; }
 }
 .hero__logo-img {
   width: 100%;
-  max-width: 340px;
+  max-width: 300px;
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 0 60px rgba(41,184,217,.45)) drop-shadow(0 24px 48px rgba(0,0,0,.35));
+  position: relative;
+  z-index: 1;
   animation: float 5s ease-in-out infinite;
+}
+
+/* White cloud behind the logo */
+.hero__logo-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -28px -36px;
+  background: rgba(255,255,255,.97);
+  border-radius: 56% 44% 52% 48% / 48% 52% 44% 56%;
+  filter: blur(2px);
+  box-shadow: 0 12px 60px rgba(41,184,217,.25), 0 0 0 1px rgba(41,184,217,.1);
+  z-index: 0;
+  animation: cloudMorph 8s ease-in-out infinite;
+}
+@keyframes cloudMorph {
+  0%, 100% { border-radius: 56% 44% 52% 48% / 48% 52% 44% 56%; }
+  33%       { border-radius: 44% 56% 48% 52% / 52% 48% 56% 44%; }
+  66%       { border-radius: 50% 50% 44% 56% / 44% 56% 52% 48%; }
 }
 @keyframes float {
   0%, 100% { transform: translateY(0); }
