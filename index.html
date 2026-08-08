@@ -51,9 +51,9 @@
 
     <!-- ========== HERO ========== -->
     <section class="hero" id="inicio">
-      <!-- decorative circles matching brand style -->
-      <div class="hero__deco hero__deco--tl"></div>
-      <div class="hero__deco hero__deco--br"></div>
+      <div class="hero__orb hero__orb--1"></div>
+      <div class="hero__orb hero__orb--2"></div>
+      <div class="hero__orb hero__orb--3"></div>
 
       <div class="container hero__content">
         <div class="hero__badge">Fabricación nacional · Villa Luzuriaga</div>
@@ -64,26 +64,31 @@
         </h1>
 
         <p class="hero__desc">
-          Somos una empresa familiar con planta propia de 1800 m² en Villa Luzuriaga.
+          Empresa familiar con planta propia de 1800 m² en Villa Luzuriaga.
           Fabricamos bolsas de polietileno de alta y baja densidad, con impresión
-          hasta 6 colores y entrega en 10 días en la provincia de Buenos Aires.
+          hasta 6 colores y entrega en 10 días.
         </p>
 
         <div class="hero__actions">
-          <a href="#productos" class="btn btn--primary">Ver Productos</a>
-          <a href="#contacto"  class="btn btn--ghost">Solicitar Cotización</a>
+          <a href="#configurador" class="btn btn--primary">Diseñá tu bolsa</a>
+          <a href="#contacto"     class="btn btn--ghost">Solicitar Cotización</a>
         </div>
 
         <div class="hero__features">
           <div class="hero__feat"><span class="hero__feat-dot"></span>Hasta 6 colores de impresión</div>
-          <div class="hero__feat"><span class="hero__feat-dot"></span>Medidas a pedido del cliente</div>
-          <div class="hero__feat"><span class="hero__feat-dot"></span>Entrega en 10 días (hasta 100 km, sin costo)</div>
-          <div class="hero__feat"><span class="hero__feat-dot"></span>Interior: 10 días puesto en expreso del cliente</div>
+          <div class="hero__feat"><span class="hero__feat-dot"></span>Medidas 100% a pedido del cliente</div>
+          <div class="hero__feat"><span class="hero__feat-dot"></span>Entrega en 10 días — hasta 100 km sin costo</div>
+          <div class="hero__feat"><span class="hero__feat-dot"></span>Interior: puesto en expreso del cliente</div>
         </div>
       </div>
 
       <div class="hero__visual">
-        <img src="img/logo.png" alt="Plásticos Exclusivos S.A." class="hero__logo-img" />
+        <div class="hero__logo-wrap">
+          <img src="img/logo.png" alt="Plásticos Exclusivos S.A." class="hero__logo-img" />
+          <div class="hero__chip hero__chip--1">✓ &nbsp;Entrega en 10 días</div>
+          <div class="hero__chip hero__chip--2">🎨 &nbsp;6 colores de impresión</div>
+          <div class="hero__chip hero__chip--3">📐 &nbsp;Medidas a pedido</div>
+        </div>
       </div>
 
     </section>
@@ -91,24 +96,24 @@
     <!-- ========== STATS ========== -->
     <section class="stats">
       <div class="container stats__grid">
-        <div class="stat">
+        <div class="stat reveal">
           <span class="stat__icon">🏭</span>
-          <span class="stat__number">1800 m²</span>
+          <span class="stat__number" data-count="1800" data-suffix=" m²">1800 m²</span>
           <span class="stat__label">Planta propia en Villa Luzuriaga</span>
         </div>
-        <div class="stat">
+        <div class="stat reveal reveal-d1">
           <span class="stat__icon">🎨</span>
-          <span class="stat__number">6</span>
+          <span class="stat__number" data-count="6" data-suffix="">6</span>
           <span class="stat__label">Colores de impresión disponibles</span>
         </div>
-        <div class="stat">
+        <div class="stat reveal reveal-d2">
           <span class="stat__icon">🚚</span>
-          <span class="stat__number">10 días</span>
+          <span class="stat__number" data-count="10" data-suffix=" días">10 días</span>
           <span class="stat__label">Entrega hasta 100 km sin costo</span>
         </div>
-        <div class="stat">
+        <div class="stat reveal reveal-d3">
           <span class="stat__icon">📐</span>
-          <span class="stat__number">100%</span>
+          <span class="stat__number" data-count="100" data-suffix="%">100%</span>
           <span class="stat__label">Medidas adaptadas al cliente</span>
         </div>
       </div>
@@ -128,7 +133,7 @@
 
         <div class="products__grid">
 
-          <article class="product-card">
+          <article class="product-card reveal">
             <div class="product-card__icon">✂️</div>
             <div class="product-card__num">01</div>
             <h3 class="product-card__name">Láminas Cortadas</h3>
@@ -138,7 +143,7 @@
             <div class="product-card__spec">Medidas: 8×8 cm hasta 5×5 metros</div>
           </article>
 
-          <article class="product-card">
+          <article class="product-card reveal reveal-d1">
             <div class="product-card__icon">🛍️</div>
             <div class="product-card__num">02</div>
             <h3 class="product-card__name">Bolsas Tubo</h3>
@@ -148,7 +153,7 @@
             <div class="product-card__spec">Medidas: 8 cm hasta 2,50 metros</div>
           </article>
 
-          <article class="product-card">
+          <article class="product-card reveal reveal-d2">
             <div class="product-card__icon">📦</div>
             <div class="product-card__num">03</div>
             <h3 class="product-card__name">Bolsas con Fuelles</h3>
@@ -158,7 +163,7 @@
             <div class="product-card__spec">A medida del cliente</div>
           </article>
 
-          <article class="product-card">
+          <article class="product-card reveal reveal-d1">
             <div class="product-card__icon">🛒</div>
             <div class="product-card__num">04</div>
             <h3 class="product-card__name">Bolsas Camiseta/Riñón</h3>
@@ -168,7 +173,7 @@
             <div class="product-card__spec">Todos los tamaños disponibles</div>
           </article>
 
-          <article class="product-card">
+          <article class="product-card reveal reveal-d2">
             <div class="product-card__icon">📬</div>
             <div class="product-card__num">05</div>
             <h3 class="product-card__name">Bolsas Ecommerce</h3>
@@ -178,7 +183,7 @@
             <div class="product-card__spec">A medida del cliente</div>
           </article>
 
-          <article class="product-card">
+          <article class="product-card reveal reveal-d3">
             <div class="product-card__icon">🔒</div>
             <div class="product-card__num">06</div>
             <h3 class="product-card__name">Bolsas con Doble Soldadura</h3>
@@ -488,7 +493,7 @@
           <h2 class="section__title">Polietileno de alta y baja densidad</h2>
         </div>
         <div class="materiales__grid">
-          <div class="material-card">
+          <div class="material-card reveal">
             <div class="material-card__badge">Baja densidad</div>
             <h3>Polietileno BD</h3>
             <p>
@@ -501,7 +506,7 @@
               <li>Apto para la mayoría de productos</li>
             </ul>
           </div>
-          <div class="material-card">
+          <div class="material-card reveal reveal-d2">
             <div class="material-card__badge material-card__badge--alt">Alta densidad</div>
             <h3>Polietileno AD</h3>
             <p>
@@ -527,7 +532,7 @@
           <p class="section__desc">Trabajamos con empresas de todos los tamaños, desde kioscos hasta grandes corporaciones.</p>
         </div>
         <div class="industrias__grid">
-          <div class="industria-card">
+          <div class="industria-card reveal">
             <div class="industria-card__icon">🛒</div>
             <h3>Retail</h3>
             <ul>
@@ -536,7 +541,7 @@
               <li>Farmacias y laboratorios</li>
             </ul>
           </div>
-          <div class="industria-card">
+          <div class="industria-card reveal reveal-d1">
             <div class="industria-card__icon">🥩</div>
             <h3>Alimentos y Bebidas</h3>
             <ul>
@@ -545,7 +550,7 @@
               <li>Industria láctea</li>
             </ul>
           </div>
-          <div class="industria-card">
+          <div class="industria-card reveal reveal-d2">
             <div class="industria-card__icon">🌾</div>
             <h3>Agrícola / Producción</h3>
             <ul>
@@ -590,15 +595,15 @@
         </div>
 
         <div class="nosotros__cards">
-          <div class="nos-card">
+          <div class="nos-card reveal">
             <strong>📍 Ubicación</strong>
             <p>Cervantes 2063, Villa Luzuriaga<br />Buenos Aires, Argentina</p>
           </div>
-          <div class="nos-card">
+          <div class="nos-card reveal reveal-d1">
             <strong>⏱ Entrega</strong>
             <p>Hasta 100 km (Bs. As.): 10 días sin costo.<br/>Interior del país: 10 días, puesto en el expreso del cliente a cargo del mismo.</p>
           </div>
-          <div class="nos-card">
+          <div class="nos-card reveal reveal-d2">
             <strong>🎨 Personalización</strong>
             <p>Impresión hasta 6 colores. Diseño de logo incluido. Medidas 100% a pedido.</p>
           </div>
@@ -660,35 +665,35 @@
           </form>
 
           <div class="contacto__info">
-            <div class="info-card">
+            <div class="info-card reveal">
               <div class="info-card__icon">📍</div>
               <div>
                 <strong>Planta y Oficinas</strong>
                 <p>Cervantes 2063<br />Villa Luzuriaga, Buenos Aires</p>
               </div>
             </div>
-            <div class="info-card">
+            <div class="info-card reveal reveal-d1">
               <div class="info-card__icon">📞</div>
               <div>
                 <strong>Teléfono</strong>
                 <p><a href="tel:+541144437900">+54 11 4443-7900</a></p>
               </div>
             </div>
-            <div class="info-card">
+            <div class="info-card reveal reveal-d2">
               <div class="info-card__icon">✉️</div>
               <div>
                 <strong>Email</strong>
                 <p><a href="mailto:ventas@plasticosexclusivos.com.ar">ventas@plasticosexclusivos.com.ar</a></p>
               </div>
             </div>
-            <div class="info-card">
+            <div class="info-card reveal reveal-d3">
               <div class="info-card__icon">💬</div>
               <div>
                 <strong>WhatsApp</strong>
                 <p><a href="https://wa.me/5491137559951" target="_blank" rel="noopener">Escribinos por WhatsApp</a></p>
               </div>
             </div>
-            <div class="info-card">
+            <div class="info-card reveal reveal-d4">
               <div class="info-card__icon">🕐</div>
               <div>
                 <strong>Horarios</strong>

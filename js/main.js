@@ -477,3 +477,76 @@ document.getElementById('cfg-send-email')?.addEventListener('click', () => {
 
 /* ── Init ── */
 cfgUpdatePreview();
+
+/* ══════════════════════════════════════
+   INTERACTIVE FEATURES
+══════════════════════════════════════ */
+
+/* ── Scroll reveal ── */
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add('visible');
+    revealObs.unobserve(entry.target);
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -48px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+/* ── Stat counter animation ── */
+function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+function runCounter(el) {
+  const target = +el.dataset.count;
+  const suffix = el.dataset.suffix || '';
+  const duration = 1600;
+  const startTime = performance.now();
+
+  function tick(now) {
+    const progress = Math.min((now - startTime) / duration, 1);
+    const val = Math.round(easeOutCubic(progress) * target);
+    el.textContent = val.toLocaleString('es-AR') + suffix;
+    if (progress < 1) requestAnimationFrame(tick);
+    else el.classList.add('counted');
+  }
+  requestAnimationFrame(tick);
+}
+
+const statObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.querySelectorAll('.stat__number[data-count]').forEach(runCounter);
+    statObs.unobserve(entry.target);
+  });
+}, { threshold: 0.3 });
+
+const statsSection = document.querySelector('.stats');
+if (statsSection) statObs.observe(statsSection);
+
+/* ── 3D card tilt ── */
+document.querySelectorAll('.product-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = e.clientX - r.left;
+    const y = e.clientY - r.top;
+    const rx = ((y - r.height / 2) / r.height) * -10;
+    const ry = ((x - r.width  / 2) / r.width)  *  10;
+    card.style.transition = 'box-shadow .28s cubic-bezier(.4,0,.2,1)';
+    card.style.transform = `perspective(700px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
+    card.style.boxShadow = `0 20px 50px rgba(12,26,46,.18), 0 0 0 1px rgba(41,184,217,.2)`;
+  });
+
+  card.addEventListener('mouseleave', () => {
+    card.style.transition = 'transform .55s cubic-bezier(.4,0,.2,1), box-shadow .55s cubic-bezier(.4,0,.2,1)';
+    card.style.transform = '';
+    card.style.boxShadow = '';
+  });
+});
+
+/* ── Hero orb parallax on scroll ── */
+const orbs = document.querySelectorAll('.hero__orb');
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (orbs[0]) orbs[0].style.transform = `translateY(${y * 0.25}px)`;
+  if (orbs[1]) orbs[1].style.transform = `translateY(${y * 0.15}px)`;
+}, { passive: true });

@@ -1276,3 +1276,111 @@ input[type="color"]:hover { border-color: var(--cyan); }
   .hero__actions { flex-direction: column; }
   .btn { width: 100%; }
 }
+
+/* ==============================
+   REVEAL SYSTEM (scroll-triggered)
+============================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity .7s cubic-bezier(.4,0,.2,1),
+              transform .7s cubic-bezier(.4,0,.2,1);
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-d1 { transition-delay: .12s; }
+.reveal-d2 { transition-delay: .22s; }
+.reveal-d3 { transition-delay: .32s; }
+.reveal-d4 { transition-delay: .42s; }
+.reveal-d5 { transition-delay: .52s; }
+
+/* ==============================
+   HERO ORBS (real divs → JS parallax)
+============================== */
+.hero::before, .hero::after { display: none; }
+.hero__deco { display: none; }
+
+.hero__orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+}
+.hero__orb--1 {
+  width: 680px; height: 680px;
+  background: radial-gradient(circle, rgba(41,184,217,.18) 0%, transparent 65%);
+  top: -260px; right: -160px;
+  animation: orbPulse 9s ease-in-out infinite;
+}
+.hero__orb--2 {
+  width: 420px; height: 420px;
+  background: radial-gradient(circle, rgba(41,184,217,.11) 0%, transparent 65%);
+  bottom: -130px; left: 40px;
+  animation: orbPulse 11s ease-in-out infinite reverse;
+}
+.hero__orb--3 {
+  width: 220px; height: 220px;
+  background: radial-gradient(circle, rgba(41,184,217,.09) 0%, transparent 65%);
+  top: 35%; left: 38%;
+  animation: orbPulse 7s ease-in-out infinite .5s;
+}
+@keyframes orbPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.14); opacity: .7; }
+}
+
+/* ==============================
+   HERO FLOATING CHIPS
+============================== */
+.hero__logo-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero__chip {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,.11);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 50px;
+  padding: 10px 20px;
+  font-size: .83rem;
+  font-weight: 600;
+  color: var(--white);
+  white-space: nowrap;
+  box-shadow: 0 6px 24px rgba(0,0,0,.22);
+}
+.hero__chip--1 {
+  top: 2%; left: -44%;
+  animation: chipFloat 4.2s ease-in-out infinite;
+}
+.hero__chip--2 {
+  top: 46%; right: -40%;
+  animation: chipFloat 5s ease-in-out infinite .7s;
+}
+.hero__chip--3 {
+  bottom: 8%; left: -32%;
+  animation: chipFloat 4.6s ease-in-out infinite 1.4s;
+}
+@keyframes chipFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-9px); }
+}
+
+/* ==============================
+   CARD TILT (JS-driven)
+=============================== */
+.product-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Stat counter highlight on completion */
+.stat__number.counted {
+  color: var(--cyan);
+}
