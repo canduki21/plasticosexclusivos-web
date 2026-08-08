@@ -227,11 +227,23 @@ ul   { list-style: none; }
 }
 
 .hero__content {
-  padding: 60px 24px 60px;
+  padding: 60px 24px;
   max-width: 580px;
-  /* override .container centering for the grid */
-  margin: 0;
-  padding-left: calc((100vw - 1160px) / 2 + 24px);
+}
+
+.hero__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+}
+
+.hero__logo-img {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 16px 40px rgba(74,174,232,.25));
 }
 
 @media (max-width: 1200px) {
