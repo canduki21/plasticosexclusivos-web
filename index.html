@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plásticos Exclusivos S.A. – Bolsas de polietileno, Villa Luzuriaga</title>
+  <meta name="description" content="Empresa familiar fabricante de bolsas de polietileno de alta y baja densidad. Planta de 1800 m² en Villa Luzuriaga. Impresión hasta 6 colores, medidas a pedido, entrega en 30 días." />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ========== NAV ========== -->
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="#inicio" class="nav__logo">
+        <!-- Logo SVG icon -->
+        <svg class="nav__logo-icon" viewBox="0 0 48 56" fill="none" aria-hidden="true">
+          <path d="M8 20 C8 12 14 6 24 6 C34 6 40 12 40 20 L40 44 C40 49 37 52 33 52 L15 52 C11 52 8 49 8 44 Z" fill="#29b8d9"/>
+          <path d="M18 6 C18 2 30 2 30 6" stroke="#1d9fbf" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <ellipse cx="24" cy="28" rx="8" ry="10" fill="rgba(255,255,255,0.2)"/>
+          <circle cx="24" cy="20" r="4" fill="rgba(255,255,255,0.35)"/>
+        </svg>
+        <span class="nav__logo-text">
+          <span class="nav__logo-main">Plásticos<br><span class="nav__logo-excl">Exclusivos</span></span>
+          <span class="nav__logo-sa">S.A.</span>
+        </span>
+      </a>
+      <ul class="nav__menu" id="nav-menu">
+        <li><a href="#inicio"    class="nav__link">Inicio</a></li>
+        <li><a href="#productos" class="nav__link">Productos</a></li>
+        <li><a href="#nosotros"  class="nav__link">Nosotros</a></li>
+        <li><a href="#contacto"  class="nav__link nav__link--cta">Contacto</a></li>
+      </ul>
+      <button class="nav__toggle" id="nav-toggle" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ========== HERO ========== -->
+    <section class="hero" id="inicio">
+      <!-- decorative circles matching brand style -->
+      <div class="hero__deco hero__deco--tl"></div>
+      <div class="hero__deco hero__deco--br"></div>
+
+      <div class="container hero__content">
+        <div class="hero__badge">Fabricación nacional · Villa Luzuriaga</div>
+
+        <h1 class="hero__title">
+          Bolsas de polietileno<br />
+          <em>a medida de tu negocio</em>
+        </h1>
+
+        <p class="hero__desc">
+          Somos una empresa familiar con planta propia de 1800 m² en Villa Luzuriaga.
+          Fabricamos bolsas de polietileno de alta y baja densidad, con impresión
+          hasta 6 colores y entrega en 30 días en la provincia.
+        </p>
+
+        <div class="hero__actions">
+          <a href="#productos" class="btn btn--primary">Ver Productos</a>
+          <a href="#contacto"  class="btn btn--outline-dark">Solicitar Cotización</a>
+        </div>
+
+        <div class="hero__features">
+          <div class="hero__feat"><span class="hero__feat-dot"></span>Hasta 6 colores de impresión</div>
+          <div class="hero__feat"><span class="hero__feat-dot"></span>Medidas a pedido del cliente</div>
+          <div class="hero__feat"><span class="hero__feat-dot"></span>Entrega en 30 días (provincia)</div>
+          <div class="hero__feat"><span class="hero__feat-dot"></span>Envíos a todo el país</div>
+        </div>
+      </div>
+
+      <div class="hero__visual">
+        <div class="hero__bag-showcase">
+          <!-- Big decorative bag shape -->
+          <svg viewBox="0 0 200 240" class="hero__bag-svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="bagGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#4dd0e8"/>
+                <stop offset="100%" stop-color="#0097b2"/>
+              </linearGradient>
+            </defs>
+            <path d="M30 80 C30 50 55 24 100 24 C145 24 170 50 170 80 L170 200 C170 220 158 232 140 232 L60 232 C42 232 30 220 30 200 Z" fill="url(#bagGrad)" opacity="0.9"/>
+            <path d="M72 24 C72 8 128 8 128 24" stroke="#29b8d9" stroke-width="6" fill="none" stroke-linecap="round"/>
+            <ellipse cx="100" cy="120" rx="36" ry="48" fill="rgba(255,255,255,0.12)"/>
+            <circle cx="100" cy="80" r="18" fill="rgba(255,255,255,0.22)"/>
+          </svg>
+          <div class="hero__bubble hero__bubble--1">Alta y Baja Densidad</div>
+          <div class="hero__bubble hero__bubble--2">Impresión 6 colores</div>
+          <div class="hero__bubble hero__bubble--3">Medidas 8cm → 3.5m</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== STATS ========== -->
+    <section class="stats">
+      <div class="container stats__grid">
+        <div class="stat">
+          <span class="stat__number">1800 m²</span>
+          <span class="stat__label">Planta propia en Villa Luzuriaga</span>
+        </div>
+        <div class="stat">
+          <span class="stat__number">6</span>
+          <span class="stat__label">Colores de impresión disponibles</span>
+        </div>
+        <div class="stat">
+          <span class="stat__number">30 días</span>
+          <span class="stat__label">Entrega en provincia sin costo</span>
+        </div>
+        <div class="stat">
+          <span class="stat__number">100%</span>
+          <span class="stat__label">Medidas adaptadas al cliente</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== PRODUCTOS ========== -->
+    <section class="section productos" id="productos">
+      <div class="container">
+        <div class="section__head">
+          <span class="section__tag">Nuestros Productos</span>
+          <h2 class="section__title">Soluciones para cada necesidad</h2>
+          <p class="section__desc">
+            Fabricamos bolsas de polietileno de alta y baja densidad en todas las medidas.
+            Todos los productos pueden imprimirse hasta 6 colores y adaptarse a las medidas de cada cliente.
+          </p>
+        </div>
+
+        <div class="products__grid">
+
+          <article class="product-card">
+            <div class="product-card__num">01</div>
+            <h3 class="product-card__name">Láminas Cortadas</h3>
+            <p class="product-card__desc">
+              Separador de productos entre sí. Funciona como barrera de fluidos y protege superficies durante el embalaje.
+            </p>
+            <div class="product-card__spec">Medidas: 8×8 cm hasta 5×5 metros</div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-card__num">02</div>
+            <h3 class="product-card__name">Bolsas Comunes</h3>
+            <p class="product-card__desc">
+              Con soldadura de fondo o lateral. La opción más versátil para embalaje general en industria y comercio.
+            </p>
+            <div class="product-card__spec">Medidas: 8 cm hasta 3,5 metros</div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-card__num">03</div>
+            <h3 class="product-card__name">Bolsas con Fuelles</h3>
+            <p class="product-card__desc">
+              Soldaduras de fondo y laterales. Ideales para contenedores rígidos. Los pliegues permiten mayor volumen ocupando menos espacio.
+            </p>
+            <div class="product-card__spec">A medida del cliente</div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-card__num">04</div>
+            <h3 class="product-card__name">Bolsas Camiseta</h3>
+            <p class="product-card__desc">
+              Con soldaduras de fondo y laterales, y sacabocado superior que genera manijas. Muy utilizadas en comercios y supermercados.
+            </p>
+            <div class="product-card__spec">Todos los tamaños disponibles</div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-card__num">05</div>
+            <h3 class="product-card__name">Bolsas con Boca</h3>
+            <p class="product-card__desc">
+              La más utilizada en retail de productos personales. Tiene soldadura lateral y fuelle superior para espacio de carga extra.
+            </p>
+            <div class="product-card__spec">A medida del cliente</div>
+          </article>
+
+          <article class="product-card">
+            <div class="product-card__num">06</div>
+            <h3 class="product-card__name">Bolsas con Doble Soldadura</h3>
+            <p class="product-card__desc">
+              La parte superior se corta generando una solapa. Puede incluir tira adhesiva de cierre. También disponible con soldadura simple y fuelle interior.
+            </p>
+            <div class="product-card__spec">Con o sin adhesivo de cierre</div>
+          </article>
+
+        </div>
+
+        <!-- Print highlight -->
+        <div class="print-highlight">
+          <div class="print-highlight__icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="8" y="8" width="32" height="32" rx="4"/><path d="M16 8v6M32 8v6"/><path d="M8 24h32"/><circle cx="16" cy="32" r="2" fill="currentColor" stroke="none"/><circle cx="24" cy="32" r="2" fill="currentColor" stroke="none"/><circle cx="32" cy="32" r="2" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <div class="print-highlight__text">
+            <strong>Impresión hasta 6 colores en todos los productos</strong>
+            <span>Incluimos el diseño de tu logo. Podemos adaptar cualquier producto a las medidas exactas de tu empresa.</span>
+          </div>
+          <a href="#contacto" class="btn btn--primary">Pedir Cotización</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== MATERIALES ========== -->
+    <section class="section materiales">
+      <div class="container">
+        <div class="section__head">
+          <span class="section__tag">Materiales</span>
+          <h2 class="section__title">Polietileno de alta y baja densidad</h2>
+        </div>
+        <div class="materiales__grid">
+          <div class="material-card">
+            <div class="material-card__badge">Baja densidad</div>
+            <h3>Polietileno BD</h3>
+            <p>
+              El más utilizado en nuestros productos. Es elástico, termoformable y cristalino. Apto para la mayoría de aplicaciones en embalaje flexible.
+            </p>
+            <ul>
+              <li>Muy elástico y resistente</li>
+              <li>Termoformable</li>
+              <li>Cristalino y transparente</li>
+              <li>Apto para la mayoría de productos</li>
+            </ul>
+          </div>
+          <div class="material-card">
+            <div class="material-card__badge material-card__badge--alt">Alta densidad</div>
+            <h3>Polietileno AD</h3>
+            <p>
+              Utilizado para productos más rígidos. Soporta cargas con menor espesor. Resistente y apto para productos orgánicos.
+            </p>
+            <ul>
+              <li>Mayor rigidez estructural</li>
+              <li>Menor espesor para igual carga</li>
+              <li>Apto para productos orgánicos</li>
+              <li>Ampliamente usado en supermercados</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== INDUSTRIAS ========== -->
+    <section class="section industrias">
+      <div class="container">
+        <div class="section__head">
+          <span class="section__tag">Industrias</span>
+          <h2 class="section__title">¿Quiénes son nuestros clientes?</h2>
+          <p class="section__desc">Trabajamos con empresas de todos los tamaños, desde kioscos hasta grandes corporaciones.</p>
+        </div>
+        <div class="industrias__grid">
+          <div class="industria-card">
+            <div class="industria-card__icon">🛒</div>
+            <h3>Retail</h3>
+            <ul>
+              <li>Supermercados</li>
+              <li>Tiendas de ropa</li>
+              <li>Farmacias y laboratorios</li>
+            </ul>
+          </div>
+          <div class="industria-card">
+            <div class="industria-card__icon">🥩</div>
+            <h3>Alimentos y Bebidas</h3>
+            <ul>
+              <li>Frigoríficos</li>
+              <li>Distribuidoras de alimentos</li>
+              <li>Industria láctea</li>
+            </ul>
+          </div>
+          <div class="industria-card">
+            <div class="industria-card__icon">🌾</div>
+            <h3>Agrícola / Producción</h3>
+            <ul>
+              <li>Molinos e industrias de embalaje</li>
+              <li>Semillas y fertilizantes</li>
+              <li>Industria automotriz</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== NOSOTROS ========== -->
+    <section class="section nosotros" id="nosotros">
+      <div class="container nosotros__layout">
+        <div class="nosotros__text">
+          <span class="section__tag">Quiénes Somos</span>
+          <h2 class="section__title">Una empresa familiar<br />con planta propia</h2>
+          <p>
+            <strong>Plásticos Exclusivos S.A.</strong> es una empresa familiar argentina
+            especializada en la fabricación de bolsas de polietileno de alta y baja densidad.
+            Estamos ubicados en Villa Luzuriaga y contamos con una planta de producción
+            propia de <strong>1800 m²</strong>.
+          </p>
+          <p>
+            Nuestros productos son completamente personalizables: adaptamos medidas,
+            espesores y colores a las necesidades de cada cliente. Ofrecemos
+            <strong>impresión hasta 6 colores</strong> e incluimos el diseño del logo
+            de tu empresa en las bolsas.
+          </p>
+          <p>
+            Entregamos en 30 días en la provincia de Buenos Aires sin costo de envío
+            y realizamos envíos a todo el país y al exterior.
+          </p>
+
+          <div class="nosotros__vals">
+            <div class="val-item"><span>✓</span> Empresa familiar argentina</div>
+            <div class="val-item"><span>✓</span> Planta propia 1800 m²</div>
+            <div class="val-item"><span>✓</span> Diseño de logo incluido</div>
+            <div class="val-item"><span>✓</span> Envíos nacionales e internacionales</div>
+          </div>
+        </div>
+
+        <div class="nosotros__cards">
+          <div class="nos-card">
+            <strong>📍 Ubicación</strong>
+            <p>Cervantes 2058, Villa Luzuriaga<br />Buenos Aires, Argentina</p>
+          </div>
+          <div class="nos-card">
+            <strong>⏱ Entrega</strong>
+            <p>30 días en la provincia sin costo. Envíos a todo el país y al exterior vía transfer.</p>
+          </div>
+          <div class="nos-card">
+            <strong>🎨 Personalización</strong>
+            <p>Impresión hasta 6 colores. Diseño de logo incluido. Medidas 100% a pedido.</p>
+          </div>
+          <div class="nos-card">
+            <strong>📦 Compra mínima</strong>
+            <p>Consultanos por cantidades mínimas y precios por unidad o kilo según el producto.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CONTACTO ========== -->
+    <section class="section contacto" id="contacto">
+      <div class="container">
+        <div class="section__head">
+          <span class="section__tag">Contacto</span>
+          <h2 class="section__title">Hablemos de tu proyecto</h2>
+          <p class="section__desc">Completá el formulario y te enviamos un presupuesto. Respondemos en menos de 24 horas hábiles.</p>
+        </div>
+
+        <div class="contacto__layout">
+
+          <form class="contact-form" id="contact-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="nombre">Nombre y Apellido *</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Juan Pérez" required />
+              </div>
+              <div class="form-group">
+                <label for="empresa">Empresa</label>
+                <input type="text" id="empresa" name="empresa" placeholder="Mi Empresa SA" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Correo Electrónico *</label>
+                <input type="email" id="email" name="email" placeholder="juan@empresa.com" required />
+              </div>
+              <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" name="telefono" placeholder="+54 11 0000-0000" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="producto">Producto de interés</label>
+              <select id="producto" name="producto">
+                <option value="">Seleccioná un producto...</option>
+                <option>Láminas Cortadas</option>
+                <option>Bolsas Comunes</option>
+                <option>Bolsas con Fuelles</option>
+                <option>Bolsas Camiseta</option>
+                <option>Bolsas con Boca</option>
+                <option>Bolsas con Doble Soldadura</option>
+                <option>Otro / Consulta general</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="mensaje">Mensaje *</label>
+              <textarea id="mensaje" name="mensaje" rows="5" placeholder="Contanos qué necesitás: tipo de bolsa, medidas, cantidad, colores de impresión..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary btn--full">Enviar Consulta</button>
+            <div class="form__success" id="form-success" aria-live="polite"></div>
+          </form>
+
+          <div class="contacto__info">
+            <div class="info-card">
+              <div class="info-card__icon">📍</div>
+              <div>
+                <strong>Planta y Oficinas</strong>
+                <p>Cervantes 2058<br />Villa Luzuriaga, Buenos Aires</p>
+              </div>
+            </div>
+            <div class="info-card">
+              <div class="info-card__icon">📞</div>
+              <div>
+                <strong>Teléfono</strong>
+                <p><a href="tel:+541100000000">+54 11 0000-0000</a></p>
+              </div>
+            </div>
+            <div class="info-card">
+              <div class="info-card__icon">✉️</div>
+              <div>
+                <strong>Email</strong>
+                <p><a href="mailto:info@plasticosexclusivossa.com">info@plasticosexclusivossa.com</a></p>
+              </div>
+            </div>
+            <div class="info-card">
+              <div class="info-card__icon">💬</div>
+              <div>
+                <strong>WhatsApp</strong>
+                <p><a href="https://wa.me/5491100000000" target="_blank" rel="noopener">Escribinos por WhatsApp</a></p>
+              </div>
+            </div>
+            <div class="info-card">
+              <div class="info-card__icon">🕐</div>
+              <div>
+                <strong>Horarios</strong>
+                <p>Lunes a Viernes: 9:00 – 17:00 hs<br /><span style="font-size:.8rem;opacity:.7">Visitas a planta con turno previo</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container footer__layout">
+
+      <div class="footer__brand">
+        <div class="footer__logo">
+          <svg viewBox="0 0 48 56" fill="none" width="38" aria-hidden="true">
+            <path d="M8 20 C8 12 14 6 24 6 C34 6 40 12 40 20 L40 44 C40 49 37 52 33 52 L15 52 C11 52 8 49 8 44 Z" fill="#29b8d9"/>
+            <path d="M18 6 C18 2 30 2 30 6" stroke="#1d9fbf" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <ellipse cx="24" cy="28" rx="8" ry="10" fill="rgba(255,255,255,0.2)"/>
+            <circle cx="24" cy="20" r="4" fill="rgba(255,255,255,0.35)"/>
+          </svg>
+          <span>Plásticos<br /><strong>Exclusivos</strong> <small>S.A.</small></span>
+        </div>
+        <p>Empresa familiar fabricante de bolsas de polietileno. Villa Luzuriaga, Buenos Aires.</p>
+        <p class="footer__addr">Cervantes 2058 · (011) 0000-0000</p>
+      </div>
+
+      <div class="footer__links">
+        <strong>Navegación</strong>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#productos">Productos</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__links">
+        <strong>Productos</strong>
+        <ul>
+          <li><a href="#productos">Láminas Cortadas</a></li>
+          <li><a href="#productos">Bolsas Comunes</a></li>
+          <li><a href="#productos">Bolsas con Fuelles</a></li>
+          <li><a href="#productos">Bolsas Camiseta</a></li>
+          <li><a href="#productos">Bolsas con Boca</a></li>
+          <li><a href="#productos">Doble Soldadura</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        <p>&copy; 2024 Plásticos Exclusivos S.A. – Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
