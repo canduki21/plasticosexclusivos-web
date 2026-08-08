@@ -135,7 +135,23 @@ document.querySelectorAll('.type-card').forEach(card => {
 });
 
 document.getElementById('cfg-espesor')?.addEventListener('change', e => {
-  cfg.espesor = e.target.value;
+  const wrap = document.getElementById('espesor-custom-wrap');
+  if (e.target.value === 'custom') {
+    wrap.style.display = 'block';
+    const customInput = document.getElementById('cfg-espesor-custom');
+    cfg.espesor = customInput.value || '';
+  } else {
+    wrap.style.display = 'none';
+    cfg.espesor = e.target.value;
+  }
+  cfgUpdatePreview();
+});
+
+document.getElementById('cfg-espesor-custom')?.addEventListener('input', e => {
+  let v = +e.target.value;
+  if (v < 25) { v = 25; e.target.value = 25; }
+  if (v > 200) { v = 200; e.target.value = 200; }
+  cfg.espesor = v ? String(v) : '';
   cfgUpdatePreview();
 });
 
@@ -393,7 +409,7 @@ function cfgUpdatePreview() {
   const fuelleLabel  = cfg.fuelleTipo === 'americano' ? 'fuelle americano' : 'fuelle lateral';
   const fuelleSuffix = cfg.tipo === 'Bolsas con Fuelles' ? ` + ${fuelleLabel} ${cfg.fuelle} cm` : '';
   setText('sum-medidas',   cfg.ancho && cfg.alto ? `${cfg.ancho} × ${cfg.alto} cm${fuelleSuffix}` : '—');
-  setText('sum-espesor',   cfg.espesor   ? cfg.espesor + (cfg.espesor === 'Otro' ? '' : ' µ') : '—');
+  setText('sum-espesor',   cfg.espesor   ? cfg.espesor + ' µ' : '—');
   setText('sum-material',  cfg.material  || '—');
   setText('sum-impresion', cfg.impresion === 0 ? 'Sin impresión' : cfg.impresion + ' color' + (cfg.impresion > 1 ? 'es' : ''));
   setText('sum-cantidad',  cfg.cantidad  ? cfg.cantidad.toLocaleString('es-AR') + ' u.' : '—');
@@ -417,7 +433,7 @@ function buildMessage() {
   return `¡Hola! Quisiera solicitar una cotización:\n\n` +
     `🛍️ *Tipo de bolsa:* ${cfg.tipo || '—'}\n` +
     `📐 *Medidas:* ${cfg.ancho} cm × ${cfg.alto} cm${cfg.tipo === 'Bolsas con Fuelles' ? ` | Fuelle ${cfg.fuelleTipo === 'americano' ? 'americano (base)' : 'lateral'}: ${cfg.fuelle} cm` : ''}\n` +
-    `📏 *Espesor:* ${cfg.espesor}${cfg.espesor === 'Otro' ? '' : ' µ'}\n` +
+    `📏 *Espesor:* ${cfg.espesor ? cfg.espesor + ' µ' : '—'}\n` +
     `🔩 *Material:* ${cfg.material}\n` +
     `🎨 *Impresión:* ${imp}\n` +
     `📦 *Cantidad:* ${cfg.cantidad.toLocaleString('es-AR')} unidades\n` +
