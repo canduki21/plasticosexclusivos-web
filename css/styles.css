@@ -137,32 +137,11 @@ ul   { list-style: none; }
 .nav__logo {
   display: flex;
   align-items: center;
-  gap: 10px;
 }
-.nav__logo-icon {
-  width: 36px;
-  height: 42px;
-  flex-shrink: 0;
-}
-.nav__logo-text {
-  display: flex;
-  align-items: baseline;
-  gap: 5px;
-  font-size: .9rem;
-  line-height: 1.2;
-}
-.nav__logo-main {
-  font-weight: 700;
-  color: var(--text);
-  font-size: .95rem;
-}
-.nav__logo-excl { font-weight: 800; }
-.nav__logo-sa {
-  font-size: .72rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  align-self: flex-start;
-  margin-top: 2px;
+.nav__logo-img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
 }
 
 /* Menu */
@@ -747,18 +726,17 @@ ul   { list-style: none; }
 }
 
 .footer__logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
   margin-bottom: 14px;
 }
-.footer__logo span {
-  font-size: .9rem;
-  line-height: 1.3;
-  color: rgba(255,255,255,.85);
+.footer__logo-img {
+  height: 72px;
+  width: auto;
+  object-fit: contain;
+  /* logo has light bg — add a subtle rounded bg so it reads on dark footer */
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 6px 10px;
 }
-.footer__logo strong { font-weight: 800; }
-.footer__logo small  { font-size: .7rem; font-weight: 400; opacity: .6; }
 
 .footer__brand p { font-size: .875rem; line-height: 1.65; max-width: 280px; }
 .footer__addr { margin-top: 8px; font-size: .825rem; opacity: .55; }
