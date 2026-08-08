@@ -135,20 +135,7 @@ document.querySelectorAll('.type-card').forEach(card => {
   });
 });
 
-document.getElementById('cfg-espesor')?.addEventListener('change', e => {
-  const wrap = document.getElementById('espesor-custom-wrap');
-  if (e.target.value === 'custom') {
-    wrap.style.display = 'block';
-    const customInput = document.getElementById('cfg-espesor-custom');
-    cfg.espesor = customInput.value || '';
-  } else {
-    wrap.style.display = 'none';
-    cfg.espesor = e.target.value;
-  }
-  cfgUpdatePreview();
-});
-
-document.getElementById('cfg-espesor-custom')?.addEventListener('input', e => {
+document.getElementById('cfg-espesor')?.addEventListener('input', e => {
   let v = +e.target.value;
   if (v < 25) { v = 25; e.target.value = 25; }
   if (v > 200) { v = 200; e.target.value = 200; }
