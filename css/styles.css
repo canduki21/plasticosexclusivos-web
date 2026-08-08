@@ -734,6 +734,31 @@ input[type="color"] {
 .qty-row { display: flex; align-items: center; gap: 10px; margin-top: 6px; }
 .qty-row input { max-width: 140px; }
 
+/* Fuelle section */
+.fuelle-section { margin-top: 4px; }
+
+.fuelle-each {
+  font-size: .75rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.fuelle-disclaimer {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: #fff8e1;
+  border: 1px solid #ffe082;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-top: 12px;
+  color: #5d4037;
+  font-size: .82rem;
+  line-height: 1.55;
+}
+.fuelle-disclaimer svg { flex-shrink: 0; margin-top: 1px; color: #f9a825; }
+.fuelle-disclaimer strong { color: #4e342e; }
+
 /* Upload area */
 .upload-area {
   display: block;

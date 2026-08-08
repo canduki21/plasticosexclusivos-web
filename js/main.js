@@ -77,6 +77,7 @@ const cfg = {
   ancho:     30,
   alto:      40,
   espesor:   '80',
+  fuelle:    5,
   material:  'Polietileno Baja Densidad (BD)',
   color:     '#d4eaf7',
   impresion: 0,
@@ -117,6 +118,7 @@ document.querySelectorAll('.type-card').forEach(card => {
     card.classList.add('selected');
     cfg.tipo = card.dataset.type;
     card.querySelector('input').checked = true;
+    cfgToggleFuelle();
     cfgUpdatePreview();
   });
 });
@@ -126,6 +128,7 @@ document.querySelectorAll('.type-card').forEach(card => {
   const el = document.getElementById(id);
   if (el) el.addEventListener('input', () => {
     cfg[id === 'cfg-ancho' ? 'ancho' : 'alto'] = +el.value || 0;
+    cfgUpdateFuelleDisclaimer();
     cfgUpdatePreview();
   });
 });
@@ -134,6 +137,31 @@ document.getElementById('cfg-espesor')?.addEventListener('change', e => {
   cfg.espesor = e.target.value;
   cfgUpdatePreview();
 });
+
+/* ── Fuelle input ── */
+document.getElementById('cfg-fuelle')?.addEventListener('input', e => {
+  cfg.fuelle = +e.target.value || 0;
+  cfgUpdateFuelleDisclaimer();
+  cfgUpdatePreview();
+});
+
+function cfgUpdateFuelleDisclaimer() {
+  const txt = document.getElementById('fuelle-disclaimer-text');
+  if (!txt) return;
+  const totalMaterial = cfg.ancho + cfg.fuelle * 2;
+  txt.innerHTML =
+    `El fuelle de <strong>${cfg.fuelle} cm</strong> se duplica en cada lado al plegarse. ` +
+    `Ancho del tubo de material necesario: ` +
+    `<strong>${cfg.ancho} + (${cfg.fuelle} × 2) = ${totalMaterial} cm</strong>.`;
+}
+
+function cfgToggleFuelle() {
+  const sec = document.getElementById('fuelle-section');
+  if (!sec) return;
+  const show = cfg.tipo === 'Bolsas con Fuelles';
+  sec.style.display = show ? 'block' : 'none';
+  if (show) cfgUpdateFuelleDisclaimer();
+}
 
 /* ── Material ── */
 document.querySelectorAll('input[name="cfg-material"]').forEach(r => {
@@ -229,10 +257,14 @@ uploadArea?.addEventListener('drop', e => {
 });
 
 /* ── SVG bag shapes ── */
-function cfgBagSVG(tipo, color) {
+function cfgBagSVG(tipo, color, fuelle) {
   const fill   = color;
   const stroke = shadeColor(color, -30);
   const hi     = lightenColor(color, 40);
+  /* Proportional fuelle strip width (10–45px based on fuelle vs ancho) */
+  const totalW   = Math.max(cfg.ancho + fuelle * 2, 1);
+  const fuellePx = Math.round((fuelle / totalW) * 150);
+  const fp = Math.min(Math.max(fuellePx, 10), 45);
 
   const shapes = {
     'Láminas Cortadas': `
@@ -247,16 +279,11 @@ function cfgBagSVG(tipo, color) {
       <ellipse cx="100" cy="130" rx="40" ry="55" fill="${hi}" opacity=".25"/>`,
 
     'Bolsas con Fuelles': `
-      <!-- Main bag rectangle -->
       <rect x="25" y="30" width="150" height="210" rx="6" fill="${fill}" stroke="${stroke}" stroke-width="3"/>
-      <!-- Left gusset strip -->
-      <rect x="25" y="30" width="30" height="210" rx="4" fill="${shadeColor(fill,-18)}" opacity=".5"/>
-      <!-- Right gusset strip -->
-      <rect x="145" y="30" width="30" height="210" rx="4" fill="${shadeColor(fill,-18)}" opacity=".5"/>
-      <!-- Left fold line -->
-      <line x1="55" y1="30" x2="55" y2="240" stroke="${stroke}" stroke-width="2" opacity=".6"/>
-      <!-- Right fold line -->
-      <line x1="145" y1="30" x2="145" y2="240" stroke="${stroke}" stroke-width="2" opacity=".6"/>`,
+      <rect x="25" y="30" width="${fp}" height="210" rx="4" fill="${shadeColor(fill,-18)}" opacity=".5"/>
+      <rect x="${175-fp}" y="30" width="${fp}" height="210" rx="4" fill="${shadeColor(fill,-18)}" opacity=".5"/>
+      <line x1="${25+fp}" y1="30" x2="${25+fp}" y2="240" stroke="${stroke}" stroke-width="2" opacity=".6"/>
+      <line x1="${175-fp}" y1="30" x2="${175-fp}" y2="240" stroke="${stroke}" stroke-width="2" opacity=".6"/>`,
 
     'Bolsas Camiseta/Riñón': `
       <!-- Bag body -->
@@ -306,7 +333,7 @@ function cfgUpdatePreview() {
   const svgH = Math.round(200 * ratio);
   svg.setAttribute('viewBox', `0 0 200 ${svgH}`);
 
-  svg.innerHTML = cfgBagSVG(tipo, cfg.color);
+  svg.innerHTML = cfgBagSVG(tipo, cfg.color, cfg.fuelle);
 
   /* Logo overlay */
   if (cfg.logoDataUrl) {
@@ -326,7 +353,8 @@ function cfgUpdatePreview() {
 
   /* Update summary */
   setText('sum-tipo',      cfg.tipo      || '—');
-  setText('sum-medidas',   cfg.ancho && cfg.alto ? `${cfg.ancho} × ${cfg.alto} cm` : '—');
+  const fuelleSuffix = cfg.tipo === 'Bolsas con Fuelles' ? ` + fuelle ${cfg.fuelle} cm` : '';
+  setText('sum-medidas',   cfg.ancho && cfg.alto ? `${cfg.ancho} × ${cfg.alto} cm${fuelleSuffix}` : '—');
   setText('sum-espesor',   cfg.espesor   ? cfg.espesor + (cfg.espesor === 'Otro' ? '' : ' µ') : '—');
   setText('sum-material',  cfg.material  || '—');
   setText('sum-impresion', cfg.impresion === 0 ? 'Sin impresión' : cfg.impresion + ' color' + (cfg.impresion > 1 ? 'es' : ''));
@@ -350,7 +378,7 @@ function buildMessage() {
 
   return `¡Hola! Quisiera solicitar una cotización:\n\n` +
     `🛍️ *Tipo de bolsa:* ${cfg.tipo || '—'}\n` +
-    `📐 *Medidas:* ${cfg.ancho} cm × ${cfg.alto} cm\n` +
+    `📐 *Medidas:* ${cfg.ancho} cm × ${cfg.alto} cm${cfg.tipo === 'Bolsas con Fuelles' ? ` | Fuelle: ${cfg.fuelle} cm x lado (tubo: ${cfg.ancho + cfg.fuelle*2} cm)` : ''}\n` +
     `📏 *Espesor:* ${cfg.espesor}${cfg.espesor === 'Otro' ? '' : ' µ'}\n` +
     `🔩 *Material:* ${cfg.material}\n` +
     `🎨 *Impresión:* ${imp}\n` +
